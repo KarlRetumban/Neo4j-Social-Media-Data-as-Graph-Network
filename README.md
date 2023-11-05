@@ -1,14 +1,72 @@
 # Social Media Data as Graph Network
-### Tools used is Neo4j
+### Toos used is Neo4j
 
 ### Description of use case
-We create a Social Media data and store as graph data. The nodes are the social media users connected by links or edges.
+We create a synthetic Social Media data and store it as a graph data. 
 
 #### Graph data view in Neo4j
-![alt text](https://github.com/KarlRetumban/Samptest/blob/main/Graphdata.PNG)
+![alt text](https://github.com/KarlRetumban/Samptest/blob/main/images/socialnetwork.PNG)
 
+* nodes - the social mediua users
+* labels - these are the interests of the social media users
+* edges - these are the social media connection links link friends, likes, comments, and follows.
+  
+
+#### Neo4j Queries
+We run some queries on the social media data.
+
+##### 1. Find the friends of Alice and their Connections
+This query retrieves Alice's friends, along with the relationships and their connections. 
+The output graph will show Alice connected to her friends and their connections with labels describing the relationships.
+
+~~~cypher
+MATCH (alice:Person {name: "Alice Peterson"})-[:FRIENDS]-(friend)-[r]-(other)
+RETURN alice, friend, r, other;
+~~~
+
+Below is the output.
+![alt text](https://github.com/KarlRetumban/Samptest/blob/main/images/query1.PNG)
+
+
+
+##### 2. Visualize the Friendship Network
+This query generates a visualization of the friendship network, including friends of friends (1 to 2 degrees of separation). 
+The output graph will depict the complex web of friendships in the network.
+
+~~~cypher
+MATCH p=(n:Person)-[:FRIENDS*1..2]-(m:Person)
+RETURN p;
+~~~
+
+Below is the output.
+![alt text](https://github.com/KarlRetumban/Samptest/blob/main/images/query2.PNG)
+
+
+
+##### 3. Count the number of followers for each users.
+ We find the number of followers for each user that has followers. 
+ Knowing the number of followers of social media users gives us information on the list of people who are “popular” or mostly followed.
+
+~~~cypher
+// Count no. of followers
+MATCH (follower:Person)-[:FOLLOWS]->(followed:Person)
+WITH followed, COUNT(follower) AS followersCount
+RETURN followed.name AS username, followersCount
+ORDER BY followersCount DESC
+~~~
+
+Below is the output.
+![alt text](https://github.com/KarlRetumban/Samptest/blob/main/images/query3.PNG)
+
+
+
+
+__________________________________
 
 ### Codes for creating the Social Media graph data
+Below are the codes used for creatingthe social media data.
+
+
 ~~~cypher
 // Create nodes and links 
 CREATE (alice:Person:Photographer {name: "Alice Peterson", age:25, gender:"female", username: "alice234"}),
