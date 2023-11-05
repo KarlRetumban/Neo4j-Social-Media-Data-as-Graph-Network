@@ -25,6 +25,7 @@ RETURN alice, friend, r, other;
 ~~~
 
 Below is the output.
+
 ![alt text](https://github.com/KarlRetumban/Samptest/blob/main/images/query1.PNG)
 
 
