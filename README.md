@@ -1,16 +1,39 @@
 # Social Media Data as Graph Network
 ### Toos used is Neo4j
 
+
+#### The Components of Graph Data Model
+*Nodes*: The entities in the data.
+       
+*Labels*: Each node can have one or more *label* that specifies the type of the node.
+
+*Relationships*: Connect two nodes. They have a single direction and type.
+
+*Properties*: Key-value pair properties can be stored on both nodes and relationships.
+
+---------------------------
+
 ### Description of use case
 We create a synthetic Social Media data and store it as a graph data. 
+
+In the social media data's case, we have;
+* nodes -  The social mediua users
+* labels - these are the interests of the social media users
+* edges - these are the social media connection links link friends, likes, comments, and follows.
+* properties - the age, gender, name and user name of users
+
 
 #### Graph data view in Neo4j
 ![alt text](https://github.com/KarlRetumban/Samptest/blob/main/images/socialnetwork.PNG)
 
-* nodes - the social mediua users
-* labels - these are the interests of the social media users
-* edges - these are the social media connection links link friends, likes, comments, and follows.
-  
+
+
+
+
+
+
+
+
 
 #### Neo4j Queries
 We run some queries on the social media data.
